@@ -12,16 +12,18 @@ public class BankBookController {
 	@Autowired 
 	private BankBookService bankBookService;
 
-	@RequestMapping(value="bankbook/list.do", method = RequestMethod.GET)
+	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String getList()throws Exception{
 		System.out.println("list");
-		bankBookService.service();
+		
 		return "bankbook/list";
 	}
 	
-	@RequestMapping(value="/bankbook/detail.do")
-	public String getDtail() throws Exception{
-		System.out.println("detail");
+	@RequestMapping(value="/detail")
+	public String getDetail(BankBookDTO bankBookDTO) throws Exception{
+		bankBookDTO = bankBookService.getDetail(bankBookDTO);
+		System.out.println(bankBookDTO.getBookNum());
+		System.out.println(bankBookDTO.getBookName());
 		return "bankbook/detail";
 	}
 	
