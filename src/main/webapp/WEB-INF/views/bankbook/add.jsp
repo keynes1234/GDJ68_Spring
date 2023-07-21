@@ -29,14 +29,14 @@
 		</div>
 		
 		<div class="form-check">
-		  <input class="form-check-input" value="1" type="radio" name="booKSale"  id="booKSale1" checked>
-		  <label class="form-check-label" for="booKSale1">
+		  <input class="form-check-input" value="1" type="radio" name="bookSale"  id="booKSale1" checked>
+		  <label class="form-check-label" for="bookSale1">
 		    판매가능
 		  </label>
 		</div>
 		<div class="form-check">
-		  <input class="form-check-input" value="0" type="radio" name="booKSale" id="booKSale2" checked>
-		  <label class="form-check-label" for="booKSale2">
+		  <input class="form-check-input" value="0" type="radio" name="bookSale" id="booKSale2" checked>
+		  <label class="form-check-label" for="bookSale2">
 		   판매중단
 		  </label>
 		</div>

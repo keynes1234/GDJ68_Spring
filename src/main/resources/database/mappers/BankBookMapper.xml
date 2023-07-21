@@ -5,12 +5,31 @@
 	
 	<mapper namespace="com.iu.main.bankBook.BankBookDAO">
 	
+	<select id="getList" resultType="com.iu.main.bankBook.BankBookDTO" >
+		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
+	</select>
+	
 	<select id="getDetail" resultType="com.iu.main.bankBook.BankBookDTO" parameterType="com.iu.main.bankBook.BankBookDTO">
 		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
 	</select>
-	<select id="getDetail" resultType="com.iu.main.bankBook.BankBookDTO"  parameterType="com.iu.main.bankBook.BankBookDTO">
-		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
-	</select>
 	
+	
+	<insert id="setAdd" parameterType="com.iu.main.bankBook.BankBookDTO">
+		INSERT INTO BANKBOOK (BOOKNUM, BOOKNAME, BOOKCONTENTS, BOOKRATE, BOOKSALE)
+		VALUES (BANK_SEQ.NEXTVAL,  #{bookName},#{bookContents}, #{bookRate},#{bookSale}) 
+	</insert>
+	
+	<delete id="setDelete" parameterType="java.lang.Long">
+		DELETE BANKBOOK WHERE BOOKNUM=#{num}
+	</delete>
+			
+	<update id="setUpdate"  parameterType="com.iu.main.bankBook.BankBookDTO">
+		UPDATE BANKBOOK SET 
+		BOOKNAME=#{bookName},
+		BOOKRATE=#{bookRate},
+		BOOKSALE=#{bookSale},
+		BOOKCONTENTS=#{bookContents}
+		WHERE BOOKNUM=#{bookNum}
+	</update>		
 			
 		</mapper>
