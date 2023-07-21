@@ -8,7 +8,9 @@
 	<select id="getDetail" resultType="com.iu.main.bankBook.BankBookDTO" parameterType="com.iu.main.bankBook.BankBookDTO">
 		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
 	</select>
-	
+	<select id="getDetail" resultType="com.iu.main.bankBook.BankBookDTO"  parameterType="com.iu.main.bankBook.BankBookDTO">
+		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
+	</select>
 	
 			
 		</mapper>
