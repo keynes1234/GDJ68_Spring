@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.iu.main.util.Pager;
 
 @Controller
 @RequestMapping("/bankbook/*")
@@ -19,9 +22,10 @@ public class BankBookController {
 	private BankBookService bankBookService;
 	
 	@RequestMapping(value="list", method = RequestMethod.GET)
-	public String getList(Model model)throws Exception{
-		List<BankBookDTO> ar = bankBookService.getList();
+	public String getList(Pager pager, Model model)throws Exception{
+		List<BankBookDTO> ar = bankBookService.getList(pager);
 		model.addAttribute("list", ar);
+		model.addAttribute("pager",pager);
 		return "bankbook/list";
 	}
 	
@@ -51,9 +55,13 @@ public class BankBookController {
 	
 	//수정form
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public void setUpdate(BankBookDTO bankBookDTO, Model model )throws Exception{
-		bankBookDTO = bankBookService.getDetail(bankBookDTO);
-		model.addAttribute("dto", bankBookDTO);
+	public ModelAndView setUpdate(BankBookDTO bankBookDTO,Model model)throws Exception{
+//		bankBookDTO = bankBookService.getDetail(bankBookDTO);
+//		model.addAttribute("dto", bankBookDTO);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("bankBook/update");
+		mv.addObject("dto", bankBookDTO);
+		return mv;
 	}
 	
 	//update
@@ -68,6 +76,7 @@ public class BankBookController {
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String setDelete(@RequestParam(name = "bookNum") Long num)throws Exception{
 		int result = bankBookService.setDelete(num);
+		
 		return "redirect:./list";
 	}
 	

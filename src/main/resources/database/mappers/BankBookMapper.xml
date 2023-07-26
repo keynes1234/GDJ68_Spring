@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.bankBook.BankBookDAO">
 	
-	<mapper namespace="com.iu.main.bankBook.BankBookDAO">
-	
-	<select id="getList" resultType="com.iu.main.bankBook.BankBookDTO" >
-		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
+	<select id="getList" parameterType="com.iu.main.util.Pager" resultType="BankBookDTO" >
+		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM	
+			(SELECT ROWNUM R, B.* FROM
+				(
+					SELECT * FROM BANKBOOK
+					WHERE BOOKNUM>0
+					ORDER BY BOOKNUM DESC
+				) B
+			)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="getDetail" resultType="com.iu.main.bankBook.BankBookDTO" parameterType="com.iu.main.bankBook.BankBookDTO">
+	<select id="getTotal" resultType="Long">
+        SELECT COUNT(BOOKNUM) FROM BANKBOOK
+     </select>
+	
+	<select id="getDetail" resultType="BankBookDTO"  parameterType="BankBookDTO">
 		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
 	</select>
 	
-	
-	<insert id="setAdd" parameterType="com.iu.main.bankBook.BankBookDTO">
-		INSERT INTO BANKBOOK (BOOKNUM, BOOKNAME, BOOKCONTENTS, BOOKRATE, BOOKSALE)
-		VALUES (BANK_SEQ.NEXTVAL,  #{bookName},#{bookContents}, #{bookRate},#{bookSale}) 
+	<insert id="setAdd" parameterType="BankBookDTO">
+		INSERT INTO BANKBOOK 
+		VALUES (BANK_SEQ.NEXTVAL, #{bookName},#{bookRate},#{bookSale},#{bookContents})
 	</insert>
 	
-	<delete id="setDelete" parameterType="java.lang.Long">
-		DELETE BANKBOOK WHERE BOOKNUM=#{num}
-	</delete>
-			
-	<update id="setUpdate"  parameterType="com.iu.main.bankBook.BankBookDTO">
-		UPDATE BANKBOOK SET 
+	<update id="setUpdate" parameterType="BankBookDTO">
+		UPDATE BANKBOOK	SET
 		BOOKNAME=#{bookName},
 		BOOKRATE=#{bookRate},
 		BOOKSALE=#{bookSale},
 		BOOKCONTENTS=#{bookContents}
 		WHERE BOOKNUM=#{bookNum}
-	</update>		
-			
-		</mapper>
+	</update>
+	
+	<delete id="setDelete" parameterType="Long">
+		DELETE BANKBOOK WHERE BOOKNUM=#{num}
+	</delete>
+	
+
+
+  </mapper>

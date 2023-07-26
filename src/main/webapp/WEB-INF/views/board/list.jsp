@@ -23,6 +23,8 @@
             <th>NO</th><th>SUBJECT</th><th>NAME</th><th>DATE</th><th>HIT</th>
          </thead>
          <tbody>
+         
+         
             <c:forEach items="${requestScope.list}" var="d" varStatus="i"> 
                <tr>
                   <td><a href="./detail?noticeNo=${d.noticeNo}">${d.noticeNo}</a></td>
