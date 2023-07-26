@@ -39,4 +39,5 @@ public class BankBookDTO {
 	public void setBookSale(Integer bookSale) {
 		this.bookSale = bookSale;
 	}
+	
 }
