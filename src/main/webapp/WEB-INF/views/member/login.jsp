@@ -12,7 +12,7 @@
 <section class="container mt-5">	
 	<h1 class="my-3">Login Page</h1>
 	
-	<form action="./login.do" method="post">
+	<form action="./login" method="post">
 	
 	
 	<div class="mb-3">

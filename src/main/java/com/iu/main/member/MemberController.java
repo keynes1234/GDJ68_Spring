@@ -37,7 +37,7 @@ public class MemberController {
 			session.setAttribute("member", memberDTO);
 		}
 		
-		return "redirect:..";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "logout")
@@ -50,18 +50,21 @@ public class MemberController {
 	@RequestMapping(value = "mypage")
 	public void getMyPage(HttpSession session) { }
 	
-	@RequestMapping(value = "memberUpdate")
-	public void setMemberUpdate(HttpSession session) { }
-	
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-	public String setMemberUpdate(MemberDTO memberDTO, HttpSession session) {
-		memberDTO.setId(((MemberDTO)session.getAttribute("member")).getId());
-		int result = memberService.setMemberUpdate(memberDTO);
-		
-		if(result > 0) {
-			session.setAttribute("member", memberDTO);
+	//update
+		@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+		public void setMemberUpdate()throws Exception{
+			
 		}
 		
-		return "redirect:./mypage";
-	}
+		@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+		public String setMemberUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
+			MemberDTO sessionMember = (MemberDTO)session.getAttribute("member");
+			memberDTO.setId(sessionMember.getId());
+			int result = memberService.setMemberUpdate(memberDTO);
+			if(result>0) {
+				session.setAttribute("member", memberDTO);
+			}
+			 
+			return "redirect:./mypage";
+		}
 }
