@@ -12,7 +12,7 @@
 <section class="container mt-5">	
 	<h1 class="my-3">Join Page</h1>
 	
-	<form action="./join.do" method="post">
+	<form action="./join.do" method="post" enctype = "multipart/form-data">
 	
 	
 	<div class="mb-3">
@@ -36,8 +36,8 @@
 	</div>
 	
 	<div class="mb-3">
-	  <label for="birth" class="form-label">Birth</label>
-	  <input type="date" name="birth" class="form-control" id="birth" placeholder="PW를 입력하세요">
+	  <label for="pic" class="form-label">사진첨부</label>
+	  <input type="file" name="pic" class="form-control" id="pic" placeholder="PW를 입력하세요">
 	</div>
 	
 	<div class="mb-3">

@@ -42,7 +42,7 @@
 		    </c:if>
 		    
 		    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-		    <li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
+		    <li class="page-item"><a class="page-link" href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 		    </c:forEach>
 		    
 		    
@@ -56,6 +56,20 @@
 		    
 		  </ul>
 		</nav>
+		
+		<div class="input-group mb-3">
+		<form action="./list"method="get">
+		 <select name="kind" class="form-select" aria-label="Default select example">
+		  <option value="name">Name</option>
+		  <option value="contents">Contents</option>
+		  
+		</select>
+		  <input type="text" class="search" aria-label="Amount (to the nearest dollar)">
+		  <div class="col-auto">
+		    <button type="submit" class="btn btn-primary mb-3">검색</button>
+		  </div>
+  </form>
+</div>
 		
 		
 		<a class="btn btn-danger" href="./add">상품등록</a>

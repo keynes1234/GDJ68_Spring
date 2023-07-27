@@ -20,26 +20,26 @@ public class FrontController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "index.do")
-	public String home1() throws Exception{
-		
-		return "index";
-	}
-	
-	@RequestMapping(value = "bankbook/add.do")
-	public String add() throws Exception{
-		
-		return "/bankbook/add";
-	}
-	
-	@RequestMapping(value="/member/login.do", method = RequestMethod.GET)
-	public String getLogin() throws Exception{
-		return "member/login";
-	}
-	
-	@RequestMapping(value = "member/join.do")
-	public String join() throws Exception{
-		
-		return "/member/join";
-	}
+//	@RequestMapping(value = "index.do")
+//	public String home1() throws Exception{
+//		
+//		return "index";
+//	}
+//	
+//	@RequestMapping(value = "bankbook/add.do")
+//	public String add() throws Exception{
+//		
+//		return "/bankbook/add";
+//	}
+//	
+//	@RequestMapping(value="/member/login.do", method = RequestMethod.GET)
+//	public String getLogin() throws Exception{
+//		return "member/login";
+//	}
+//	
+//	@RequestMapping(value = "member/join.do")
+//	public String join() throws Exception{
+//		
+//		return "/member/join";
+//	}
 }

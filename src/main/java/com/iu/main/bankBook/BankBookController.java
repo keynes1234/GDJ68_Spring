@@ -56,11 +56,12 @@ public class BankBookController {
 	//수정form
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public ModelAndView setUpdate(BankBookDTO bankBookDTO,Model model)throws Exception{
-//		bankBookDTO = bankBookService.getDetail(bankBookDTO);
-//		model.addAttribute("dto", bankBookDTO);
+		bankBookDTO = bankBookService.getDetail(bankBookDTO);
+		model.addAttribute("dto", bankBookDTO);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("bankBook/update");
-		mv.addObject("dto", bankBookDTO);
+		mv.setViewName("bankbook/update");
+//		mv.addObject("dto", bankBookDTO);
+//		model.addAttribute("dto", bankBookDTO);
 		return mv;
 	}
 	

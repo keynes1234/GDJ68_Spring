@@ -2,6 +2,11 @@ package com.iu.main.util;
 
 
 public class Pager {
+	
+	//검색
+	private String kind;
+	private String search;
+	
 	private Long startRow;
 	private Long lastRow;
 	
@@ -183,6 +188,30 @@ public class Pager {
 
 	public void setNext(boolean next) {
 		this.next = next;
+	}
+
+
+	public String getKind() {
+		return kind;
+	}
+
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+
+	public String getSearch() {
+		if(this.search == null) {
+			this.search="";
+		}
+		
+		return search;
+	}
+
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	
 	

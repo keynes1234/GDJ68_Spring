@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.member.MemberDAO">
+	<insert id="setJoin" parameterType="MemberDTO">
+		INSERT INTO MEMBER (ID,PW,NAME,EMAIL,BIRTH)
+		VALUES (#id,#pw,#)
+	</insert>
+	
+	
+	<select id="login" parameterType="MemberDTO" resultType="MemberDTO" >
+		SELECT * FROM MEMBER WHERE ID=#{id} AND PW=#{pw}
+	</select>
+	<!-- 
+	<select id="getTotal" resultType="Long">
+      
+     </select>
+	
+	<select id="getDetail" resultType="BankBookDTO"  parameterType="BankBookDTO">
+		
+	</select>
+	
+	<insert id="setAdd" parameterType="BankBookDTO">
+		
+	</insert>
+	
+	<update id="setUpdate" parameterType="BankBookDTO">
+		
+	</update>
+	
+	<delete id="setDelete" parameterType="Long">
+		
+	</delete>
+ -->	
+
+
+  </mapper>
