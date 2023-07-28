@@ -19,7 +19,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String setJoin(MemberDTO memberDTO, MultipartFile pic, HttpSession session)throws Exception {
-		memberService.setJoin(memberDTO,pic, session);
+		int result = memberService.setJoin(memberDTO,pic, session);
 		System.out.println(pic.getName());
 		System.out.println(pic.getOriginalFilename());
 		System.out.println(pic.getSize());
@@ -31,13 +31,15 @@ public class MemberController {
 	public void getLogin() throws Exception { }
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String getLogin(MemberDTO memberDTO, HttpSession session) {
+	public String getLogin(MemberDTO memberDTO, HttpSession session)throws Exception{
 		memberDTO = memberService.getLogin(memberDTO);
+		
 		if(memberDTO != null) {
 			session.setAttribute("member", memberDTO);
 		}
 		
-		return "redirect:/";
+		return "redirect:../";
+		
 	}
 	
 	@RequestMapping(value = "logout")

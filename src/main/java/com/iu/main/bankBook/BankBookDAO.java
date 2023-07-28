@@ -36,9 +36,19 @@ public class BankBookDAO {
 		return sqlSession.selectOne(NAMESPACE+"getDetail", bankBookDTO);
 	}
 	
+	public long getSequence()throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getSequence");
+	}
+	
+	
 	//add
 	public int setAdd(BankBookDTO bankBookDTO)throws Exception{
+		
 		return sqlSession.insert(NAMESPACE+"setAdd", bankBookDTO);
+	}
+	
+	public int setFileAdd(BankBookFileDTO bankBookFileDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setFileAdd", bankBookFileDTO);
 	}
 	
 	//update

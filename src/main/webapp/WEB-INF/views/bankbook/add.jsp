@@ -10,42 +10,30 @@
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
+<section class="container mt-5">	
+	<h1 class="my-4">My Page</h1>
 	
-	<section class="container mt-5">
-	<h1 class="my-4">Add Page</h1>
-	
-	<form action="./add" method="post">
-		<div class="mb-3">
-		  <label for="bookName" class="form-label">상품명</label>
-		  <input type="text" name="bookName" class="form-control" id="bookName" placeholder="상품명">
-		</div>
-		<div class="mb-3">
-		  <label for="bookContents" class="form-label">상품내용</label>
-		  <textarea class="form-control" name="bookContents" id="bookContents" rows="3"></textarea>
-		</div>	
-		<div class="mb-3">
-		  <label for="bookRate" class="form-label">이자율</label>
-		  <input type="text" name="bookRate" class="form-control" id="bookRate" placeholder="이자율">
-		</div>
+	<div>
+		<p>
+			<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}">
+		</p>
+		<p>
+			${member.id} : ${sessionScope.member.name}
+		</p>
+		<p>
+			${member.email}
+		</p>
+		<p>
+			${member.birth}
+		</p>
 		
-		<div class="form-check">
-		  <input class="form-check-input" value="1" type="radio" name="bookSale"  id="booKSale1" checked>
-		  <label class="form-check-label" for="bookSale1">
-		    판매가능
-		  </label>
-		</div>
-		<div class="form-check">
-		  <input class="form-check-input" value="0" type="radio" name="bookSale" id="booKSale2" checked>
-		  <label class="form-check-label" for="bookSale2">
-		   판매중단
-		  </label>
-		</div>
+		
+	</div>
 
-		<div class="my-3">
-			<button type="submit" class="btn btn-danger">상품등록</button>
-		</div>
+	<a class="btn btn-primary" href="./memberUpdate">회원수정</a>
+	
+	
+</section>
 
-	</form>
-	</section>
 </body>
 </html>
