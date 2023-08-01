@@ -49,12 +49,14 @@ public class QnaController {
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public String setAdd(QnaDTO qnaDTO, Model model)throws Exception{
+		qnaDTO = (QnaDTO)qnaService.getDetail(qnaDTO);
 		model.addAttribute("dto", qnaDTO);
 		return "board/detail";
 	}
 	@RequestMapping(value = "reply", method = RequestMethod.GET)
 	public String setReply(Long num, Model model)throws Exception{
 		model.addAttribute("num", num);
+		System.out.println("contGET");
 		return "board/reply";
 	}
 	
