@@ -17,11 +17,12 @@
 	<div class="container-fluid">
 	
 		<div class="row justify-content-center my-4">
-			<h1 class="col-md-7 text-center">${board} Add Page</h1>
+			<h1 class="col-md-7 text-center">${board} Reply Page</h1>
 		</div>
 		
 		<div class="row justify-content-center my-4">
-			<form class="col-md-7" action="./add" method="post" enctype="multipart/form-data">
+			<form class="col-md-7" action="./reply" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="num" value="${num}">
 				<div class="mb-3">
 				  <label for="writer" class="form-label">작성자</label>
 				  <input type="text" name="name" readonly value="${member.id}" class="form-control" id="writer">

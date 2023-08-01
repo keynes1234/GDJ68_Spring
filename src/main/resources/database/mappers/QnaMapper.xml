@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.board.qna.QnaDAO">
+    	<sql id="searchSql">
+	  		WHERE QNANUM>0 
+							
+			<choose>
+				<when test="kind=='subject'">
+					AND QNASUBJECT LIKE '%'||#{search}||'%'
+				</when>
+				
+				<when test="kind=='contents'">
+					AND QNACONTENTS LIKE '%'||#{search}||'%'
+				</when>
+				
+				<otherwise>
+					AND QNANAME LIKE '%'||#{search}||'%'	
+				</otherwise>
+			</choose>
+  		</sql>
+  	
+  	<select id="getTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(QNANUM) FROM QNABOARD 
+  		<include refid="searchSql"></include>
+  	</select>
+  
+	<select id="getList" resultMap="getSelectResult" parameterType="Pager">
+	  		SELECT 
+	  			*
+			FROM(
+				SELECT 
+					ROWNUM R, 
+					B.* 
+				FROM(
+					SELECT
+						* 
+					FROM 
+						QNABOARD
+					
+					<include refid="searchSql"></include>
+						
+					ORDER BY 
+						QNANUM DESC
+					) B
+				)
+			WHERE
+				R BETWEEN #{startRow} AND #{lastRow}
+	  	</select>
+	  	
+	  	<select id="getDetail" parameterType="QnaDTO" resultMap="getSelectResult">
+	  		SELECT * FROM QNABOARD WHERE QNANUM=#{num}
+<!-- 	  		SELECT Q.*, QF.*
+	  		FROM QNABOARD Q
+	  			 LEFT JOIN
+	  			 QNAFILE QF
+	  			 on Q.QNANUM=QF.QNANUM
+	  		WHERE Q.QNANUM=#{num} -->
+	  	</select>
+  	
+	  	<resultMap type="QnaDTO" id="getSelectResult">
+	  		<id column="QNANUM" property="num"/>
+	  		<result column="QNASUBJECT" property="subject"/>
+  			<result column="QNANAME" property="name"/>
+	  		<result column="QNACONTENTS" property="contents"/>
+	  		<result column="QNADATE" property="createDate"/>
+	  		<result column="QNAHIT" property="hit"/>
+	  		
+	  		
+	  		
+	  	</resultMap>
+	  	
+	  	<insert id="setAdd" parameterType="QnaDTO">
+	  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+	  			SELECT QNABOARD_SEQ.NEXTVAL FROM DUAL
+	  		</selectKey>
+	  	
+	  		INSERT INTO QNABOARD (QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH)
+	  		VALUES (#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, #{num}, 0, 0)
+	  	
+	  	</insert>
+	  	
+	  	<update id="setStepUpdate" parameterType="QnaDTO">
+	  		UPDATE QNABOARD SET STEP=STEP+1
+	  		WHERE REF=#{ref} AND STEP>#{step}
+	  	
+	  	</update>
+		
+	  	
+	  	
+	  	<insert id="setReplyAdd" parameterType="QnaDTO">
+	  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+	  			SELECTQNABOARD_SEQ.NEXTVAL FROM DUAL
+	  		</selectKey>
+	  		INSERT INTO QNABOARD 
+	  		(QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH)
+	  		VALUES
+	  		(#{num}, #{name}, #{subject}, #{contents}, sysdate, 0,#{ref}, #{step}, #{depth} )
+	  	</insert>
+	  	
+	  	
+	  	
+	  	
+	  	
+  </mapper>
